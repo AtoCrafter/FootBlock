@@ -13,6 +13,7 @@ class ItemFootBlockSupplier extends Item {
 
   setUnlocalizedName("FootBlockSupplier")
   setCreativeTab(CreativeTabs.tabTools)
+  setTextureName("footblock:supplier")
 
   override def onUpdate(itemstack: ItemStack, world: World, entity: Entity, p_77663_4_ : Int, p_77663_5_ : Boolean): Unit =
     if (!entity.isSneaking) entity match {
