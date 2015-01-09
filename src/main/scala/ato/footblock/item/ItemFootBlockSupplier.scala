@@ -6,17 +6,22 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
-import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.item.{EnumRarity, Item, ItemStack}
 import net.minecraft.world.World
 
 class ItemFootBlockSupplier extends Item {
 
+  setHasSubtypes(true)
   setUnlocalizedName("FootBlockSupplier")
   setCreativeTab(CreativeTabs.tabTools)
   setTextureName("footblock:supplier")
 
+  override def getRarity(p_77613_1_ : ItemStack): EnumRarity = EnumRarity.rare
+
+  override def hasEffect(itemstack: ItemStack, pass: Int): Boolean = isActive(itemstack)
+
   override def onUpdate(itemstack: ItemStack, world: World, entity: Entity, p_77663_4_ : Int, p_77663_5_ : Boolean): Unit =
-    if (!entity.isSneaking) entity match {
+    if (isActive(itemstack) && !entity.isSneaking) entity match {
       case player: EntityPlayer => {
         val px = math.floor(player.posX).toInt
         val y = (player.posY - (if (world.isRemote) 1.62 else 0)).toInt - 1
@@ -34,4 +39,11 @@ class ItemFootBlockSupplier extends Item {
       }
       case _ =>
     }
+
+  override def onItemRightClick(itemstack: ItemStack, world: World, player: EntityPlayer): ItemStack = {
+    if (!world.isRemote) itemstack.setItemDamage(1 - itemstack.getItemDamage)
+    itemstack
+  }
+
+  def isActive(itemstack: ItemStack): Boolean = itemstack.getItemDamage == 1
 }
