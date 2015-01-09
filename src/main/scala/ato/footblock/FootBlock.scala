@@ -1,8 +1,12 @@
 package ato.footblock
 
+import ato.footblock.block.BlockFoot
+import ato.footblock.item.ItemFootBlockSupplier
 import ato.footblock.proxy.ProxyCommon
+import ato.footblock.tileentity.TileEntityFoot
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.FMLPreInitializationEvent
+import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{Mod, SidedProxy}
 
 @Mod(modid = "FootBlock", modLanguage = "scala")
@@ -14,7 +18,13 @@ object FootBlock {
   )
   var proxy: ProxyCommon = _
 
+  val blockFoot = new BlockFoot()
+  val itemSupplier = new ItemFootBlockSupplier()
+
   @EventHandler
   def preInit(event: FMLPreInitializationEvent) {
+    GameRegistry.registerItem(itemSupplier, "FootBlockSupplier")
+    GameRegistry.registerBlock(blockFoot, "FootBlock")
+    GameRegistry.registerTileEntity(classOf[TileEntityFoot], "CollapseBlock")
   }
 }
