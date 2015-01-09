@@ -1,3 +1,5 @@
+[![Build Status](https://drone.io/github.com/AtoCrafter/FootBlock/status.png)](https://drone.io/github.com/AtoCrafter/FootBlock/latest)
+
 # FootBlock
 
 Minecraft MOD
