@@ -27,7 +27,7 @@ object FootBlock {
   def preInit(event: FMLPreInitializationEvent) {
     GameRegistry.registerItem(itemSupplier, "FootBlockSupplier")
     GameRegistry.registerBlock(blockFoot, "FootBlock")
-    GameRegistry.registerTileEntity(classOf[TileEntityFoot], "CollapseBlock")
+    GameRegistry.registerTileEntity(classOf[TileEntityFoot], "FootBlock")
     GameRegistry.addRecipe(new ItemStack(itemSupplier),
       "FSF",
       Character.valueOf('F'), Items.feather,
